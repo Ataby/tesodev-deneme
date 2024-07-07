@@ -1,0 +1,20 @@
+@use '/src/styles/variables';
+
+.button {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: variables.$primary;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1.1250em;
+    font-weight: 700;
+    height: 100%;
+    border-radius: 12px;
+
+    &:hover {
+        background-color: variables.$hoverPrimary;
+    }
+}
