@@ -8,8 +8,8 @@ function App() {
     <Router>
       <Routes>
         <Route index element={<Landing/>} />
-        <Route path="add" element={<Add/>} />
-        <Route  path="search" element={<Search/>} />
+        <Route path="/add" element={<Add/>} />
+        <Route  path="/search" element={<Search/>} />
       </Routes>
     </Router>
   );
