@@ -5,13 +5,23 @@ import Logo from "../../src/assets/logo.svg";
 import SearchInput from "../components/SearchInput/SearchInput";
 import Carousel from "../components/Carousel/Carousel";
 import Footer from "../components/Landing/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="container">
         <main className="mainContainer">
-          <Header />
+          <div className="landingHeaderContainer">
+            <div className="headerButtonContainer ">
+              <Button
+                onClick={() => navigate("/add")}
+                text={"Add new record"}
+              />
+            </div>
+          </div>
           <div className="findInContainer">
             <div>
               <img src={Logo} />
@@ -44,8 +54,7 @@ const Landing = () => {
             </div>
           </div>
         </main>
-        <Footer/>
-         
+        <Footer />
       </div>
     </>
   );
