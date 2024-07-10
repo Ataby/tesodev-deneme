@@ -11,25 +11,28 @@ class UserDb {
         let pages = 0;
         if (userDBStorage) {
           let userDb = JSON.parse(userDBStorage);
+          console.log(userDb.data.data,"sjd");
+         
     
-          userDb = userDb.data.map((item, idx) => {
+          userDb = userDb.data.data.map((item) => {
             return {
-              NameSurname: item[0],
-              Company: item[1],
-              Email: item[2],
-              Date: item[3],
-              Country: item[4],
-              City: item[5],
+              id : item[0],    
+              nameSurname: item[1],
+              company: item[2],
+              email: item[3],
+              phone: item[4],
+              website: item[5]             
             };
           });
     
           result = userDb;
+          count = result?.length;
+
           if (search !== undefined) {
             result = result.filter((user) =>
               this.isTargetContains(search, user.NameSurname)
             );
           }
-          count = result.length;
           if (order !== undefined) {
             result = result.filter((user) =>
               this.isTargetContains(search, user.NameSurname)
@@ -94,12 +97,13 @@ class UserDb {
         let userDb = JSON.parse(userDBStorage);
     
         userDb.data.push([
-          values.NameSurname,
-          values.Company,
-          values.Email,
-          values.Date,
-          values.Country,
-          values.City,
+            values.id,
+          values.nameSurname,
+          values.company,
+          values.email,
+          values.phone,
+          values.website,
+           
         ]);
         localStorage.setItem("data", JSON.stringify(userDb));
       };

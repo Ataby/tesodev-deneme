@@ -13,16 +13,16 @@ const Landing = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  const handleMoreResults = () => {
+        navigate({
+              pathname: `/search`,
+              search:`?query=${searchInput}`
+            });
+  }
 useEffect(() => {
-      setSearchResults(apiService.getUsers({ search: searchInput, limit: 3, page: 1 }));
+      setSearchResults(apiService.getUsers({ search: searchInput, limit: 4, page: 1 }));
 }, [searchInput]);
 
-const handleMoreResults = () => {
-      navigate({
-            pathname: `/search`,
-            search:`?query=${searchInput}`
-          });
-}
 
   return (
     <>
@@ -48,9 +48,9 @@ const handleMoreResults = () => {
 
                 <div className="w-full d-flex flex-row justify-center items-center ">
                   <SearchInput
-                  searchResults
-                  searchInput
-                  setSearchInput
+                  searchResults={searchResults}
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
                   onClick={handleMoreResults}
                   />
                   <div className="landingSearchButtonContainer">

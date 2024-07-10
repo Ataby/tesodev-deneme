@@ -2,8 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Add from "./pages/Add";
 import Search from "./pages/Search";
-import "../src/styles/globals.scss"
+import "../src/styles/globals.scss";
+import setAllData from "./database/dataSetting";
 
+ 
+setAllData();
 function App() {
   return (
     <Router>
