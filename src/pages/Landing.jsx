@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 import Button from "../components/Button/Button";
-import Header from '../components/Landing/Header';
-import {Logo} from "../../src/assets/logo.svg";
-import SearchInput from '../components/SearchInput/SearchInput';
-import Carousel from '../components/Carousel/Carousel';
-import Footer from '../components/Landing/Footer';
+import Header from "../components/Landing/Header";
+import Logo from "../../src/assets/logo.svg";
+import SearchInput from "../components/SearchInput/SearchInput";
+import Carousel from "../components/Carousel/Carousel";
+import Footer from "../components/Landing/Footer";
 
 const Landing = () => {
   return (
-      <>
+    <>
       <div className="container">
         <main className="mainContainer">
           <Header />
           <div className="findInContainer">
             <div>
-              Logo eklenecek
+              <img src={Logo} />
               <div className=" logoDescription">Search App</div>
             </div>
 
@@ -23,7 +23,7 @@ const Landing = () => {
                 <p className="heading">Find in records</p>
 
                 <div className="w-full d-flex flex-row justify-center items-center ">
-                  <SearchInput/>
+                  <SearchInput />
                   <div className="landingSearchButtonContainer">
                     <Button text={"Search"} />
                   </div>
@@ -39,16 +39,16 @@ const Landing = () => {
               </div>
 
               <div className="d-flex flex-col">
-                
-                <Carousel/>
+                <Carousel />
               </div>
             </div>
           </div>
         </main>
-        <Footer />
+        <Footer/>
+         
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;
