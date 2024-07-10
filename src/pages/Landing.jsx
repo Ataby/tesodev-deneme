@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import Button from "../components/Button/Button";
-import Header from "../components/Landing/Header";
 import Logo from "../../src/assets/logo.svg";
 import SearchInput from "../components/SearchInput/SearchInput";
 import Carousel from "../components/Carousel/Carousel";
 import Footer from "../components/Landing/Footer";
 import { useNavigate } from "react-router-dom";
+import apiService from "../database/useDatabase";
 
 const Landing = () => {
   const navigate = useNavigate();
+
+  const [searchInput, setSearchInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+useEffect(() => {
+      setSearchResults(apiService.getUsers({ search: searchInput, limit: 3, page: 1 }));
+}, [searchInput]);
+
+const handleMoreResults = () => {
+      navigate({
+            pathname: `/search`,
+            search:`?query=${searchInput}`
+          });
+}
 
   return (
     <>
@@ -33,9 +47,14 @@ const Landing = () => {
                 <p className="heading">Find in records</p>
 
                 <div className="w-full d-flex flex-row justify-center items-center ">
-                  <SearchInput />
+                  <SearchInput
+                  searchResults
+                  searchInput
+                  setSearchInput
+                  onClick={handleMoreResults}
+                  />
                   <div className="landingSearchButtonContainer">
-                    <Button text={"Search"} />
+                    <Button text={"Search"} onClick={()=>handleMoreResults()} />
                   </div>
                 </div>
               </div>
