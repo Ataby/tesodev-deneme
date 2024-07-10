@@ -2,8 +2,9 @@ import styles from "./Footer.module.scss";
 import footerImage from "../../assets/footerImage.png";
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className={styles.image}>
+    <div className={styles.footer} >
+
+       <div className={styles.image}>
         <img src={footerImage} />
       </div>
       <div className={styles.contact}>
@@ -25,7 +26,8 @@ const Footer = () => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-    </footer>
+    </div>
+       
   );
 };
 
