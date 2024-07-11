@@ -1,11 +1,11 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../components/Button/Button";
 import Logo from "../../src/assets/logo.svg";
 import SearchInput from "../components/SearchInput/SearchInput";
 import Carousel from "../components/Carousel/Carousel";
 import Footer from "../components/Landing/Footer";
 import { useNavigate } from "react-router-dom";
-import apiService from "../database/useDatabase";
+import { getUsers } from "../database/useDatabase";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -14,15 +14,11 @@ const Landing = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleMoreResults = () => {
-        navigate({
-              pathname: `/search`,
-              search:`?query=${searchInput}`
-            });
-  }
-useEffect(() => {
-      setSearchResults(getUsers({ search: searchInput, limit: 4, page: 1 }));
-}, [searchInput]);
-
+    navigate("/search", { state: searchResults });
+  };
+  useEffect(() => {
+    setSearchResults(getUsers({ search: searchInput, limit: 3, page: 1 }));
+  }, [searchInput]);
 
   return (
     <>
@@ -48,13 +44,16 @@ useEffect(() => {
 
                 <div className="w-full d-flex flex-row justify-center items-center ">
                   <SearchInput
-                  searchResults={searchResults}
-                  searchInput={searchInput}
-                  setSearchInput={setSearchInput}
-                  onClick={handleMoreResults}
+                    searchResults={searchResults}
+                    searchInput={searchInput}
+                    setSearchInput={setSearchInput}
+                    onClick={handleMoreResults}
                   />
                   <div className="landingSearchButtonContainer">
-                    <Button text={"Search"} onClick={()=>handleMoreResults()} />
+                    <Button
+                      text={"Search"}
+                      onClick={() => handleMoreResults()}
+                    />
                   </div>
                 </div>
               </div>
@@ -73,7 +72,7 @@ useEffect(() => {
             </div>
           </div>
         </main>
-        <Footer />
+        
       </div>
     </>
   );

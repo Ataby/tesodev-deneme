@@ -27,7 +27,7 @@ const SearchInput = ({searchResults,searchInput,setSearchInput,onClick,}) => {
           {searchInput.length > 1 && (
             <div className={styles["input-result-container"]}>
               <div className={styles["input-result"]}>
-                {searchResults && searchResults.data.map((item, index) => {
+                { searchResults.data.map((item, index) => {
                   return (
                     <div key={index}>
                       <div className={styles["input-result-item"]} key={index}>
@@ -36,10 +36,10 @@ const SearchInput = ({searchResults,searchInput,setSearchInput,onClick,}) => {
                         </div>
 
                         <div>
-                          <h1>{item?.Company || "Not Found Company"}</h1>
+                          <h1>{item?.company || "Not Found Company"}</h1>
                           <div className="d-flex flex-row ">
                             <p>
-                              {item?.City}, {item?.Country}
+                              {item?.city}, {item?.country}
                             </p>
                           </div>
                         </div>
