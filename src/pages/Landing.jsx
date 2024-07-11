@@ -20,7 +20,7 @@ const Landing = () => {
             });
   }
 useEffect(() => {
-      setSearchResults(apiService.getUsers({ search: searchInput, limit: 4, page: 1 }));
+      setSearchResults(getUsers({ search: searchInput, limit: 4, page: 1 }));
 }, [searchInput]);
 
 
