@@ -8,35 +8,36 @@ import Sorting from "../components/SearchPage/Sorting";
 
 const Search = () => {
   const { state } = useLocation();
+  const { searchResults, searchInput } = state;
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   const [showData, setShowData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [minPageLimit, setMinPageLimit] = useState(0);
   const [maxPageLimit, setMaxPageLimit] = useState(6);
-  const [newWord, setnewWord] = useState("");
+  const [newWord, setnewWord] = useState(searchInput || "");
 
   const [isOpen, setisOpen] = useState(false);
   const [optionsList] = useState([
-      { data: "name-asc", title: "Name ascending" },
-  
-      { data: "name-desc", title: "Name descending" },
-      { data: "year-asc", title: "Year ascending" },
-      { data: "year-desc", title: "Year descending" },
-    ]);
+    { data: "name-asc", title: "Name ascending" },
+
+    { data: "name-desc", title: "Name descending" },
+    { data: "year-asc", title: "Year ascending" },
+    { data: "year-desc", title: "Year descending" },
+  ]);
   const [selectedOption, setSelectedOption] = useState({
-      title:  "orderBy",
-      data: "orderBy"
-    });
+    title: "orderBy",
+    data: "orderBy",
+  });
 
   const handleSelect = (option) => {
-
-      setSelectedOption(option);
-      setisOpen(false);
-    };
+    setSelectedOption(option);
+    setisOpen(false);
+  };
 
   const getDataWithPage = (page) => {
-    const res = getUsers({ search:"" , limit: 5, page: page });
+    const res = getUsers({ search: searchInput, limit: 5, page: page });
+    console.log(res, "ress");
     setShowData(res);
     //return res.data;
     //console.log("showdata", res);
@@ -48,6 +49,7 @@ const Search = () => {
     getDataWithPage(pageNumber);
     setCurrentPage(pageNumber);
   };
+
   const onPrevClick = () => {
     if ((currentPage - 1) % 3 === 0) {
       setMaxPageLimit(maxPageLimit - 3);
@@ -56,6 +58,7 @@ const Search = () => {
     getDataWithPage(currentPage);
     setCurrentPage((prev) => prev - 1);
   };
+
   const onNextClick = () => {
     if (currentPage + 1 > maxPageLimit) {
       setMaxPageLimit(maxPageLimit + 3);
@@ -66,42 +69,24 @@ const Search = () => {
   };
 
   useEffect(() => {
-      
     if (isFirstRender) {
-      getDataWithPage();
-      console.log("First page", getDataWithPage());
-      setIsFirstRender(false);      
+      getDataWithPage(1);
+      setIsFirstRender(false);
     }
   }, []);
-
-  /*
-  <div style={{ display: "flex", gap: "1rem" }}>
-    {new Array(state.pages).fill(0).map((_, index) => (
-      <p onClick={() => getDataWithPage(index + 1)} key={index}>
-        {index + 1}
-      </p>
-    ))}
-  </div>;
-
-
-  <div style={{ display: "flex", gap: "1rem" }}>
-        {new Array(state.pages).fill(0).map((_, index) => (
-          <p onClick={() => getDataWithPage(index + 1)} key={index}>
-            {index + 1}
-          </p>
-          ))}
-          </div>
-          */
 
   return (
     <>
       <div className="container">
-        <Header newWord={newWord} setnewWord={setnewWord} />
+        <Header
+          onClickSearch={(results) => setShowData(results)}
+          newWord={newWord}
+          setnewWord={setnewWord}
+        />
         <main className="mainContainer">
           <div className="d-flex w-full  flex-col justify-center items-center">
             <div className="w-full ">
               <div className="resultContainer">
-                Search
                 {showData.data === 0 && <div>Not Found Result</div>}
                 {showData.data?.length > 0 && (
                   <ul>
@@ -127,14 +112,14 @@ const Search = () => {
                 </div>
               </div>
             </div>
-            {showData?.data?.length > 3 && state.pages > 0 && (
+            {showData?.count > 3 && showData?.pages > 0 && (
               <Pagination
                 onPageChange={onPageChange}
                 currentPage={currentPage}
                 minPageLimit={minPageLimit}
                 onPrevClick={onPrevClick}
                 onNextClick={onNextClick}
-                totalPages={state.pages}
+                totalPages={showData?.pages}
                 getDataWithPage={getDataWithPage}
                 maxPageLimit={maxPageLimit}
               />
