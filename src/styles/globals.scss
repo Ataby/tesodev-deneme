@@ -100,40 +100,9 @@ body {
     width: 100%;
     display: flex;
     justify-content: end;
-    padding-bottom: 20px;
+    
 }
 
-
-/*footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
-
-    height: 277px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 55px;
-    width: 100%;
-    background-color: variables.$bgFooter;
-    color: black;
-    text-align: center;
-
-    @media screen and (max-width: 1000px) {
-        display: none;
-
-    }
-
-    @media screen and (max-height: 1300px) {
-        display: none;
-    }
-}
-    */
-
-.mt-5 {
-    margin-top: 5px;
-}
 
 .carouselSection {
     @media screen and (max-width: 1210px) {
@@ -145,6 +114,7 @@ body {
     z-index: 0;
     align-items: center;
     height: 1000px;
+    margin: 70px 0px;
 
 
 }
@@ -163,9 +133,7 @@ body {
     height: 100%;
 
     @media screen and (min-height: 700px) {
-        gap: 50px;
-
-
+        gap: 20px;
     }
 
 }
@@ -259,7 +227,13 @@ body {
     gap: 5px;
 }
 
+.two-solid{
+    border: 2px solid red;
+}
 
+.padding{
+    padding: 10px;
+}
 
 
 
