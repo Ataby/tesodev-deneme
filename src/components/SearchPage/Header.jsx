@@ -1,22 +1,18 @@
-import { useState,useEffect } from "react";
+ import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo, SearchIcon } from "../../assets";
 import Button from "../Button/Button";
 import styles from "./header.module.scss";
 import { getUsers } from "../../database/useDatabase";
 
-const Header = ({  newWord, setnewWord }) => {
+const Header = ({  newWord, setnewWord,onClickSearch }) => {
   const navigate = useNavigate();
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleMoreResults = () => {
-      console.log("handleMoreResults deneme");
-      navigate("/search", { state: searchResults });
+  const handleNewSearch = () => {
+    const newResults = getUsers({ search: newWord, limit: 7, page: 1 });
+    onClickSearch(newResults);
   };
-
-  useEffect(() => {
-      setSearchResults(getUsers({ search: newWord}));
-    }, [newWord]);
 
   return (
     <header>
@@ -37,9 +33,7 @@ const Header = ({  newWord, setnewWord }) => {
         </div>
         <div className="landingSearchButtonContainer">
           <Button
-            onClick={() => {
-              handleMoreResults();
-            }}
+            onClick={handleNewSearch}
             text={"Search"}
           />
         </div>
@@ -53,4 +47,4 @@ const Header = ({  newWord, setnewWord }) => {
   );
 };
 
-export default Header;
+export default Header;
