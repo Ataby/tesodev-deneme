@@ -1,0 +1,22 @@
+@use '/src/styles/variables';
+
+.submitContainer {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.submitButton {
+    margin-top: 70px;
+    width: 138px;
+    height: 46px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1250em;
+    background-color: variables.$hoverPrimary;
+    color: white;
+
+    &:hover {
+        background-color: variables.$primary;
+    }
+}
