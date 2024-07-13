@@ -7,7 +7,6 @@ import { getUsers } from "../../database/useDatabase";
 
 const Header = ({  newWord, setnewWord,onClickSearch }) => {
   const navigate = useNavigate();
-  const [searchResults, setSearchResults] = useState([]);
 
   const handleNewSearch = () => {
     const newResults = getUsers({ search: newWord, limit: 7, page: 1 });
