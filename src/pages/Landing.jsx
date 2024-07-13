@@ -80,6 +80,7 @@ const Landing = () => {
                     <Button
                       text={"Search"}
                       onClick={() => handleMoreResults()}
+                      disabled={!searchInput}
                     />
                   </div>
                 </div>
