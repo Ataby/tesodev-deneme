@@ -15,30 +15,34 @@ export const addUser = (values) => {
     
     export const orderBy = (data, order) => {
       switch (order) {
-        case "name-asc":
+        case "Name ascending":
           return data.sort((a, b) =>
             (a.NameSurname || "").localeCompare(b.NameSurname || "")
           );
-        case "name-desc":
+        case "Name descending":
           return data.sort((a, b) =>
             (b.NameSurname || "").localeCompare(a.NameSurname || "")
           );
-        case "year-asc":
+        case "Year ascending":
           return data.sort((a, b) => {
-            const dateA = a.Date ? a.Date.split("/") : [];
-            const dateB = b.Date ? b.Date.split("/") : [];
-            const yearA = dateA.length === 3 ? parseInt(dateA[2], 10) : 0;
-            const yearB = dateB.length === 3 ? parseInt(dateB[2], 10) : 0;
-            return yearA - yearB;
+            let [ay1, gun1, yil1] = a.split("/");
+            let [ay2, gun2, yil2] = b.split("/");
+    
+            let date1 = new Date(yil1, ay1 - 1, gun1);
+            let date2 = new Date(yil2, ay2 - 1, gun2);
+    
+            return date1 - date2;
           });
-        case "year-desc":
+        case "Year descending":
           return data.sort((a, b) => {
-            const dateA = a.Date ? a.Date.split("/") : [];
-            const dateB = b.Date ? b.Date.split("/") : [];
-            const yearA = dateA.length === 3 ? parseInt(dateA[2], 10) : 0;
-            const yearB = dateB.length === 3 ? parseInt(dateB[2], 10) : 0;
-            return yearB - yearA;
-          });
+            let [ay1, gun1, yil1] = a.split("/");
+            let [ay2, gun2, yil2] = b.split("/");
+    
+            let date1 = new Date(yil1, ay1 - 1, gun1);
+            let date2 = new Date(yil2, ay2 - 1, gun2);
+    
+            return date1 - date2;
+          }).reverse();
         default:
           // If the 'order' value does not match any case, return data as is
           return data;
@@ -48,8 +52,6 @@ export const addUser = (values) => {
     
    
     export const isTargetContains = (search, target) => {
-      console.log(search,"search")
-      console.log(target,"target")
       return target?.toLowerCase().includes(search.toLowerCase());
     };
     
@@ -98,5 +100,5 @@ export const addUser = (values) => {
         }
       }
     
-      return { data: result, count, pages };
+      return { data: result, count, pages,search };
     };
