@@ -1,10 +1,12 @@
-
+ 
 import { MapIcon, SearchIcon } from "../../assets/";
 import Spinner from "../Spinner/spinner";
 
 import styles from "./SearchInput.module.scss";
 
 const SearchInput = ({searchResults,searchInput,setSearchInput,onClick,loading}) => {
+  const showNotFound = !loading && searchResults?.data?.length === 0;
+
   return (
     <div className={styles.searchContainer}>
       <div className={styles["search-form"]}>
@@ -30,7 +32,7 @@ const SearchInput = ({searchResults,searchInput,setSearchInput,onClick,loading})
           {searchInput.length > 0 && (
             <div className={styles["input-result-container"]}>
               <div className={styles["input-result"]}>
-                { loading ?  <Spinner /> : searchResults?.data?.map((item, index) => {
+                { (loading) ?  <Spinner />  : !showNotFound ?   searchResults?.data?.map((item, index) => {
                   return (
                     <div key={index}>
                       <div className={styles["input-result-item"]} key={index}>
@@ -52,7 +54,7 @@ const SearchInput = ({searchResults,searchInput,setSearchInput,onClick,loading})
                       </div>
                     </div>
                   );
-                })}
+                }) : (<p>Not found</p>)}
               </div>
               <button className={styles.showmore} onClick={onClick}>
                 More Results...
@@ -65,4 +67,4 @@ const SearchInput = ({searchResults,searchInput,setSearchInput,onClick,loading})
   );
 };
 
-export default SearchInput;
+export default SearchInput;
