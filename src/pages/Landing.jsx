@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+ 
+
+import React, { useState, useEffect,useRef } from "react";
 import Button from "../components/Button/Button";
 import Logo from "../../src/assets/logo.svg";
 import SearchInput from "../components/SearchInput/SearchInput";
@@ -11,10 +13,12 @@ import useDebounce from "../hooks/useDebounce";
 const Landing = () => {
   const navigate = useNavigate();
 
-  const [isFirstRender, setIsFirstRender] = useState(true);
-
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+  const isFirstRender = useRef(true)
+  const timeOutId = useRef(null)
+  
 
   const debounceValue = useDebounce(searchInput, 500);
 
@@ -22,28 +26,29 @@ const Landing = () => {
     navigate("/search", { state: { searchResults, searchInput } });
   };
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    if (isFirstRender) {
-      setIsFirstRender(false);
-      return;
-    }
+
+  const handleChange = () => {
     setLoading(true);
     const res = getUsers({ search: searchInput, limit: 3, page: 1 });
     setSearchResults(res);
-    setTimeout(() => {
+
+    // I did it for fake api delay
+    timeOutId.current = setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, [debounceValue]);
-
-  const fetchData = async () => {
-    const res = await fetch("/mock-data.json");
-    const data = await res.json();
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
+    if(isFirstRender.current){
+      isFirstRender.current = false
+      return
+    }
+    handleChange()
+    return () => {
+      if(timeOutId.current) clearTimeout(timeOutId.current)
+    }
+  }, [debounceValue])
+  
 
   return (
     <>
@@ -59,7 +64,7 @@ const Landing = () => {
           </div>
           <div className="findInContainer  ">
             <div>
-              <img src={Logo} />
+              <img src={Logo} alt="main-logo" />
               <div className=" logoDescription">Search App</div>
             </div>
 
