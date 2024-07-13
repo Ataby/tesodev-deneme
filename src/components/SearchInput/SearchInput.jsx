@@ -27,7 +27,7 @@ const SearchInput = ({searchResults,searchInput,setSearchInput,onClick,loading})
         </div>
         <div className={styles["input-result-container-one"]}>
        
-          {searchInput.length > 1 && (
+          {searchInput.length > 0 && (
             <div className={styles["input-result-container"]}>
               <div className={styles["input-result"]}>
                 { loading ?  <Spinner /> : searchResults?.data?.map((item, index) => {
