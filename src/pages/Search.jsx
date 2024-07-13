@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUsers } from "../database/useDatabase";
+import { getUsers, orderBy } from "../database/dbFunctions";
 import { useLocation } from "react-router-dom";
 import ResultCard from "../components/ResultCard/ResultCard";
 import Pagination from "../components/Pagination/pagination";
@@ -7,8 +7,8 @@ import Header from "../components/SearchPage/Header";
 import Sorting from "../components/SearchPage/Sorting";
 
 const Search = () => {
-  const { state } = useLocation();
-  const { searchResults, searchInput } = state;
+  
+  const { searchResults, searchInput } =useLocation().state;
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   const [showData, setShowData] = useState([]);
@@ -18,31 +18,29 @@ const Search = () => {
   const [newWord, setnewWord] = useState(searchInput || "");
 
   const [isOpen, setisOpen] = useState(false);
-  const [optionsList] = useState([
-    { data: "name-asc", title: "Name ascending" },
 
-    { data: "name-desc", title: "Name descending" },
-    { data: "year-asc", title: "Year ascending" },
-    { data: "year-desc", title: "Year descending" },
-  ]);
-  const [selectedOption, setSelectedOption] = useState({
-    title: "orderBy",
-    data: "orderBy",
-  });
+  const [selectedOption, setSelectedOption] = useState("orderBy");
 
   const handleSelect = (option) => {
+    console.log(showData.data,"showw");
     setSelectedOption(option);
     setisOpen(false);
+    console.log(newWord,"newword");
+    console.log(option,"option");
+    const res = getUsers({ search: searchInput, limit: 5, page: 1,order:option }); 
+    console.log(res.data,"res data")
+    //res.data boş dönüyor
+    //getusers içine order vermeyince dolu dönüyor.
+    setShowData(res);  
   };
 
-  const getDataWithPage = (page) => {
-    const res = getUsers({ search: searchInput, limit: 5, page: page });
-    console.log(res, "ress");
+  const getDataWithPage = (page,order) => {
+    const res = getUsers({ search: searchInput, limit: 5, page: page,order:order });
+    console.log(newWord, "newWord");
     setShowData(res);
     //return res.data;
     //console.log("showdata", res);
 
-    //      <pre>{JSON.stringify(state, null, 2)}</pre>
   };
 
   const onPageChange = (pageNumber) => {
@@ -82,6 +80,8 @@ const Search = () => {
           onClickSearch={(results) => setShowData(results)}
           newWord={newWord}
           setnewWord={setnewWord}
+          searchInput={searchInput}
+          
         />
         <main className="mainContainer">
           <div className="d-flex w-full  flex-col justify-center items-center">
@@ -100,9 +100,8 @@ const Search = () => {
                   </ul>
                 )}
                 <div id="select">
-                  {showData.data > 0 && (
+                  {showData.data !== undefined && (
                     <Sorting
-                      optionsList={optionsList}
                       selectedOption={selectedOption}
                       handleSelect={handleSelect}
                       isOpen={isOpen}
