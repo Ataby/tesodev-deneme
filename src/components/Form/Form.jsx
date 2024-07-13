@@ -1,59 +1,93 @@
+import { addUser } from "../../database/dbFunctions";
 import Input from "../AddPage/Input";
 import styles from "./form.module.scss";
 const Form = ({ formik }) => {
+
+  const userDbLength = JSON.parse(localStorage.getItem("data")).data.data.length
+
+
+  const handleAdd = async () => {
+    const USER_URL = formik.values.website
+    const REQUEST_URL = `${process.env.REACT_APP_URL_SHORTEN_API}url=${USER_URL}`;
+
+    const res = await fetch(REQUEST_URL)
+    const data = await res.text()
+
+    const lastData = {...formik.values,website:data,id:userDbLength+1}
+
+    addUser(lastData)
+
+    
+    
+
+  }
+
   return (
     <form onSubmit={formik.handleSubmit} className="formContainer">
       <Input
-        error={formik.touched.NameSurname && formik.errors.NameSurname}
+        error={formik.touched.nameSurname && formik.errors.nameSurname}
         errors={formik.errors}
-        name="NameSurname"
-        value={formik.values.NameSurname}
+        name="nameSurname"
+        value={formik.values.nameSurname}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         placeholder={"Enter name and surname"}
         header={"Name Surname"}
       />
       <Input
-        error={formik.touched.Country && formik.errors.Country}
+        error={formik.touched.country && formik.errors.country}
         errors={formik.errors}
-        name="Country"
-        value={formik.values.Country}
+        name="country"
+        value={formik.values.country}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         placeholder={"Enter a country"}
-        header={"Country"}
+        header={"country"}
       />
       <Input
-        error={formik.touched.City && formik.errors.City}
+        error={formik.touched.city && formik.errors.city}
         errors={formik.errors}
-        name={"City"}
-        value={formik.values.City}
+        name={"city"}
+        value={formik.values.city}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         placeholder={"Enter a city"}
-        header={"City"}
+        header={"city"}
       />
       <Input
-        error={formik.touched.Email && formik.errors.Email}
+        error={formik.touched.email && formik.errors.email}
         errors={formik.errors}
-        name={"Email"}
-        value={formik.values.Email}
+        name={"email"}
+        value={formik.values.email}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         placeholder={"Enter a e-mail (abc@xyz.com)"}
-        header={"Email"}
+        header={"email"}
+      />
+      <Input
+        error={formik.touched.website && formik.errors.website}
+        errors={formik.errors}
+        name={"website"}
+        value={formik.values.website}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        placeholder={"Enter a website url (google.com/?search=example1)"}
+        header={"website"}
       />
 
       <div className={styles.submitContainer}>
-        {Object.values(formik.errors).length === 0 && (
+
           <button
-            disabled={!(formik.isValid && formik.dirty)}
-            className={styles.submitButton}
+            disabled={!formik.isValid}
+            className={`${styles.submitButton}`}
             type="submit"
+            style={{ background: formik.isValid ? "blue" : "gray" }}
+            onClick={handleAdd}
+
           >
             Add
           </button>
-        )}
+
       </div>
     </form>
   );
