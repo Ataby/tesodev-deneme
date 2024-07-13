@@ -28,6 +28,9 @@
   }
 
   .navBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-width: 50px;
     color: inherit;
     border: none;
@@ -35,8 +38,12 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    background-color: #c3c3c3;
+    background-color: #EEEEEE;
     height: 50px;
     border-radius: 50%;
+    margin: 0 1rem;
+  }
+  .rotateBtn{
+    transform: rotate(180deg);
   }
 }
