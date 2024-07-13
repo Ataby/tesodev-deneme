@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { getUsers, orderBy } from "../database/dbFunctions";
 import { useLocation } from "react-router-dom";
 import ResultCard from "../components/ResultCard/ResultCard";
@@ -9,7 +9,7 @@ import Sorting from "../components/SearchPage/Sorting";
 const Search = () => {
   
   const { searchResults, searchInput } =useLocation().state;
-  const [isFirstRender, setIsFirstRender] = useState(true);
+  const isFirstRender = useRef(true);
 
   const [showData, setShowData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +27,7 @@ const Search = () => {
     setisOpen(false);
     console.log(newWord,"newword");
     console.log(option,"option");
-    const res = getUsers({ search: searchInput, limit: 5, page: 1,order:option }); 
+    const res = getUsers({ search: searchInput, limit: 7, page: 1,order:option }); 
     console.log(res.data,"res data")
     //res.data boş dönüyor
     //getusers içine order vermeyince dolu dönüyor.
@@ -35,7 +35,7 @@ const Search = () => {
   };
 
   const getDataWithPage = (page,order) => {
-    const res = getUsers({ search: searchInput, limit: 5, page: page,order:order });
+    const res = getUsers({ search: searchInput, limit: 7, page: page,order:order });
     console.log(newWord, "newWord");
     setShowData(res);
     //return res.data;
@@ -67,9 +67,9 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (isFirstRender) {
+    if (isFirstRender.current) {
       getDataWithPage(1);
-      setIsFirstRender(false);
+      isFirstRender.current=(false);
     }
   }, []);
 
