@@ -5,7 +5,7 @@ import SearchInput from "../components/SearchInput/SearchInput";
 import Carousel from "../components/Carousel/Carousel";
 import Footer from "../components/Landing/Footer";
 import { useNavigate } from "react-router-dom";
-import { getUsers } from "../database/useDatabase";
+import { getUsers } from "../database/dbFunctions";
 import useDebounce from "../hooks/useDebounce";
 
 const Landing = () => {
@@ -44,7 +44,6 @@ const Landing = () => {
     fetchData();
   }, []);
 
-  console.log(loading, "loading");
 
   return (
     <>
@@ -80,7 +79,7 @@ const Landing = () => {
                     <Button
                       text={"Search"}
                       onClick={() => handleMoreResults()}
-                      disabled={!searchInput}
+                      disabled={!searchInput.trim()}
                     />
                   </div>
                 </div>
