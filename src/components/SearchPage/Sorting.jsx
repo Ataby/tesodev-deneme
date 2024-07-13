@@ -1,43 +1,47 @@
-import { useState } from "react";
 import { SortIcon } from "../../assets";
 import styles from "./sorting.module.scss";
 
-const Sorting = ({
-  selectedOption,
-  handleSelect,
-  isOpen,
-  setisOpen,
-}) => {
+const Sorting = ({ selectedOption, handleSelect, isOpen, setisOpen }) => {
   const toogle = () => {
     setisOpen(!isOpen);
+    console.log("toogle ", !isOpen);
   };
 
-  const [optionsList,] = useState([
-    { data: "name-asc", title: "Name ascending" },
-    { data: "name-desc", title: "Name descending" },
-    { data: "year-asc", title: "Year ascending" },
-    { data: "year-desc", title: "Year descending" },
-  ]);
+  const optionsList = [
+    "Name ascending",
+    "Name descending",
+    "Year ascending",
+    "Year descending",
+  ];
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <button className={styles.button} type="button" onClick={toogle}>
+        <button className={styles.button} type="button" onClick={toogle}  >
           <SortIcon fill="black" width="22px" height="20px" />
-          {selectedOption?.title || "Order By"}
+          {selectedOption || "Order By"}
         </button>
-        <div
-          className={`${isOpen ? styles.open : styles.closed}`}
-          tabIndex={-1}
-        >
-          <ul>
-            {optionsList?.map((option, index) => (
-              <li key={index} onClick={() => handleSelect(option)} tabIndex={0}>
-                {option?.title}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {toogle && (
+          <div
+            className={`${isOpen ? styles.open : styles.closed}`}
+            tabIndex={-1}
+          >
+            <ul>
+              {optionsList?.map((option, index) => (
+                <li
+                  key={index}
+                  onClick={() => {
+                    handleSelect(option);
+                    
+                  }}
+                  tabIndex={0}
+                >
+                  {option}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
