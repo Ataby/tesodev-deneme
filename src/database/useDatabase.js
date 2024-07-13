@@ -55,6 +55,8 @@ export const addUser = (values) => {
                 : 0
             )
             .reverse();
+            case "orderBy" :
+              break;
       }
     };
    
