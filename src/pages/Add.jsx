@@ -5,28 +5,25 @@ import { toast } from "react-toastify";
 import Header from "../components/AddPage/Header";
 import Form from "../components/Form/Form";
 import validationSchema from "../components/Form/validation";
-import { addUser } from "../database/useDatabase";
+import { addUser } from "../database/dbFunctions";
 
 const Add = () => {
   const { state } = useLocation();
 
-  const navigate = useNavigate();
-
   const formik = useFormik({
     validateOnMount: true,
     initialValues: {
-      NameSurname: "",
-      Country: "",
-      Company: "",
-      City: "",
-      Email: "",
-      Date: new Date().getFullYear().toString(),
+      nameSurname: "",
+      country: "",
+      company: "",
+      city: "",
+      email: "",
+      date: new Date().getFullYear().toString(),
     },
 
     validationSchema,
     onSubmit: (values, { resetForm }) => {
       try {
-        addUser(values);
         toast("Added Succesfull", {
           position: "bottom-right",
           autoClose: 5000,
