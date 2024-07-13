@@ -10,8 +10,8 @@ h5,
 h6,
 p,
 pre {
-    margin: 0;
-    padding: 0
+  margin: 0;
+  padding: 0;
 }
 
 button,
@@ -21,59 +21,59 @@ input,
 legend,
 textarea,
 select {
-    margin: 0;
-    padding: 0
+  margin: 0;
+  padding: 0;
 }
 
 fieldset {
-    border: 0
+  border: 0;
 }
 
 a,
 a * {
-    cursor: pointer
+  cursor: pointer;
 }
 
 div {
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-    text-align: left
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  text-align: left;
 }
 
 hr,
 img {
-    border: 0
+  border: 0;
 }
 
 applet,
 iframe,
 object {
-    border: 0;
-    margin: 0;
-    padding: 0
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 button,
-input[type=button],
-input[type=image],
-input[type=reset],
-input[type=submit],
+input[type="button"],
+input[type="image"],
+input[type="reset"],
+input[type="submit"],
 label {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 ul,
 li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 strong {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 em {
-    font-style: italic;
+  font-style: italic;
 }

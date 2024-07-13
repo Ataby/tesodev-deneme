@@ -5,20 +5,19 @@ import styles from "./form.module.scss";
 const PUBLIC_API_URL = "https://tinyurl.com/api-create.php?";
 
 const Form = ({ formik }) => {
-
-  const userDbLength = JSON.parse(localStorage.getItem("data")).data.data.length
+  const userDbLength = JSON.parse(localStorage.getItem("data")).data.data
+    .length;
   const handleAdd = async () => {
-    const USER_URL = formik.values.website
+    const USER_URL = formik.values.website;
     const REQUEST_URL = `${PUBLIC_API_URL}url=${USER_URL}`;
 
-    const res = await fetch(REQUEST_URL)
-    const data = await res.text()
+    const res = await fetch(REQUEST_URL);
+    const data = await res.text();
 
-    const lastData = {...formik.values,website:data,id:userDbLength+1}
+    const lastData = { ...formik.values, website: data, id: userDbLength + 1 };
 
-    addUser(lastData)   
-
-  }
+    addUser(lastData);
+  };
 
   return (
     <form onSubmit={formik.handleSubmit} className="formContainer">
@@ -74,18 +73,15 @@ const Form = ({ formik }) => {
       />
 
       <div className={styles.submitContainer}>
-
-          <button
-            disabled={!formik.isValid}
-            className={`${styles.submitButton}`}
-            type="submit"
-            style={{ background: formik.isValid ? "blue" : "gray" }}
-            onClick={handleAdd}
-
-          >
-            Add
-          </button>
-
+        <button
+          disabled={!formik.isValid}
+          className={`${styles.submitButton}`}
+          type="submit"
+          style={{ background: formik.isValid ? "blue" : "gray" }}
+          onClick={handleAdd}
+        >
+          Add
+        </button>
       </div>
     </form>
   );

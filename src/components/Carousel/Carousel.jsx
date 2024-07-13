@@ -11,25 +11,25 @@ const Carousel = () => {
       image: "https://i.ibb.co/YTHNr3C/Image.png",
       title: "A Plan to Rebuild the Bus Terminal Everyone Loves to Hate",
       desc: "1h ago · by Troy Corlson",
-      id:1
+      id: 1,
     },
     {
       image: "https://i.ibb.co/YTHNr3C/Image.png",
       title: "A Plan to Rebuild the Bus Terminal Everyone Loves to Hate",
       desc: "1h ago · by Troy Corlson",
-      id:2
+      id: 2,
     },
     {
       image: "https://i.ibb.co/YTHNr3C/Image.png",
       title: "A Plan to Rebuild the Bus Terminal Everyone Loves to Hate",
       desc: "1h ago · by Troy Corlson",
-      id:3
+      id: 3,
     },
     {
       image: "https://i.ibb.co/YTHNr3C/Image.png",
       title: "A Plan to Rebuild the Bus Terminal Everyone Loves to Hate",
       desc: "1h ago · by Troy Corlson",
-      id:4
+      id: 4,
     },
   ];
 

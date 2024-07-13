@@ -1,8 +1,6 @@
 @use "../../styles/variables";
 
 .footer {
- 
-
   height: 277px;
   display: flex !important;
   flex-direction: row;
@@ -32,7 +30,7 @@
 
     & p :nth-child(1) {
       position: relative;
-      top: 20px;
+      top: 1.25rem;
     }
 
     color: white;
@@ -40,14 +38,12 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
-
-    max-width: 424px;
+    max-width: 41.5rem;
     padding-left: 25px;
   }
 
   .map {
     padding-left: 31px;
-
     width: 100%;
 
     & iframe {

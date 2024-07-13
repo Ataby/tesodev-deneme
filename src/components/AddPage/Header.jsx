@@ -9,10 +9,7 @@ const Header = () => {
       <div>
         <Logo onClick={() => navigate("/")} className={styles.logo} />
       </div>
-      <div
-        onClick={() => navigate(-1)}
-        className={styles.return}
-      >
+      <div onClick={() => navigate(-1)} className={styles.return}>
         <ReturnArrowIcon />
         <p>Return to List Page</p>
       </div>

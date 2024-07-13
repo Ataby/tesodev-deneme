@@ -1,79 +1,73 @@
-@use '/src/styles/variables';
+@use "/src/styles/variables";
 
 .main {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .pageNumbers {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-items: center;
-    align-items: center;
-
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-items: center;
+  align-items: center;
 }
 
 .dots {
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    height: 13px;
-    font-size: 24px;
-    font-weight: 700;
-    cursor: pointer;
-
-
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  height: 13px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .active {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    background-color: variables.$primary;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: variables.$primary;
 
-    color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-
+  color: white;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 4px;
 }
 
 .notactive {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    font-weight: 700;
-    border: 1px solid #484848;
-    color: black;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    border-radius: 4px;
-
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  font-weight: 700;
+  border: 1px solid #484848;
+  color: black;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .button {
-    display: flex;
-    text-align: center;
-    justify-content: center;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  background-color: white;
+  font-weight: 700;
+  font-size: .9rem;
+  color: black;
+  cursor: pointer;
+  padding: 3px;
+  border: 1px solid #484848;
+  border-radius: 4px;
+
+  &:disabled {
     background-color: white;
-    font-weight: 700;
-    font-size: 14px;
-    color: black;
-    cursor: pointer;
-    padding: 3px;
-    border: 1px solid #484848;
-
-    border-radius: 4px;
-
-    &:disabled {
-        background-color: white;
-        color: gray;
-        opacity: 30;
-        cursor: not-allowed;
-    }
+    color: gray;
+    opacity: 30;
+    cursor: not-allowed;
+  }
 }

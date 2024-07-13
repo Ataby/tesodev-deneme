@@ -2,9 +2,8 @@ import styles from "./Footer.module.scss";
 import footerImage from "../../assets/footerImage.png";
 const Footer = () => {
   return (
-    <div className={styles.footer} >
-
-       <div className={styles.image}>
+    <div className={styles.footer}>
+      <div className={styles.image}>
         <img src={footerImage} />
       </div>
       <div className={styles.contact}>
@@ -27,7 +26,6 @@ const Footer = () => {
         ></iframe>
       </div>
     </div>
-       
   );
 };
 

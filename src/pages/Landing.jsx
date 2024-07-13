@@ -1,6 +1,4 @@
- 
-
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Button from "../components/Button/Button";
 import Logo from "../../src/assets/logo.svg";
 import SearchInput from "../components/SearchInput/SearchInput";
@@ -16,9 +14,8 @@ const Landing = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const isFirstRender = useRef(true)
-  const timeOutId = useRef(null)
-  
+  const isFirstRender = useRef(true);
+  const timeOutId = useRef(null);
 
   const debounceValue = useDebounce(searchInput, 500);
 
@@ -39,16 +36,15 @@ const Landing = () => {
   };
 
   useEffect(() => {
-    if(isFirstRender.current){
-      isFirstRender.current = false
-      return
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
-    handleChange()
+    handleChange();
     return () => {
-      if(timeOutId.current) clearTimeout(timeOutId.current)
-    }
-  }, [debounceValue])
-  
+      if (timeOutId.current) clearTimeout(timeOutId.current);
+    };
+  }, [debounceValue]);
 
   return (
     <>

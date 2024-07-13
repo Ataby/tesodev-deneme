@@ -4,7 +4,6 @@ import styles from "./sorting.module.scss";
 const Sorting = ({ selectedOption, handleSelect, isOpen, setisOpen }) => {
   const toogle = () => {
     setisOpen(!isOpen);
-    console.log("toogle ", !isOpen);
   };
 
   const optionsList = [
@@ -17,8 +16,8 @@ const Sorting = ({ selectedOption, handleSelect, isOpen, setisOpen }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <button className={styles.button} type="button" onClick={toogle}  >
-          <SortIcon fill="black" width="22px" height="20px" />
+        <button className={styles.button} type="button" onClick={toogle}>
+          <SortIcon fill="black" width="1.375rem" height="1.25rem" />
           {selectedOption || "Order By"}
         </button>
         {toogle && (
@@ -32,7 +31,6 @@ const Sorting = ({ selectedOption, handleSelect, isOpen, setisOpen }) => {
                   key={index}
                   onClick={() => {
                     handleSelect(option);
-                    
                   }}
                   tabIndex={0}
                 >
