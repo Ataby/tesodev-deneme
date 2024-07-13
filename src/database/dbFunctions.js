@@ -17,11 +17,11 @@ export const addUser = (values) => {
       switch (order) {
         case "Name ascending":
           return data.sort((a, b) =>
-            (a.NameSurname || "").localeCompare(b.NameSurname || "")
+            (a.nameSurname || "").localeCompare(b.nameSurname || "")
           );
         case "Name descending":
           return data.sort((a, b) =>
-            (b.NameSurname || "").localeCompare(a.NameSurname || "")
+            (b.nameSurname || "").localeCompare(a.nameSurname || "")
           );
         case "Year ascending":
           return data.sort((a, b) => {
