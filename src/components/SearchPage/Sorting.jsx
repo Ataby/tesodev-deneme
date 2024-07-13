@@ -3,7 +3,6 @@ import { SortIcon } from "../../assets";
 import styles from "./sorting.module.scss";
 
 const Sorting = ({
-  optionsList,
   selectedOption,
   handleSelect,
   isOpen,
@@ -12,6 +11,13 @@ const Sorting = ({
   const toogle = () => {
     setisOpen(!isOpen);
   };
+
+  const [optionsList,] = useState([
+    { data: "name-asc", title: "Name ascending" },
+    { data: "name-desc", title: "Name descending" },
+    { data: "year-asc", title: "Year ascending" },
+    { data: "year-desc", title: "Year descending" },
+  ]);
 
   return (
     <div className={styles.wrapper}>
