@@ -25,8 +25,8 @@ export const addUser = (values) => {
           );
         case "Year ascending":
           return data.sort((a, b) => {
-            let [ay1, gun1, yil1] = a.split("/");
-            let [ay2, gun2, yil2] = b.split("/");
+            let [ay1, gun1, yil1] = a.date.split("/");
+            let [ay2, gun2, yil2] = b.date.split("/");
     
             let date1 = new Date(yil1, ay1 - 1, gun1);
             let date2 = new Date(yil2, ay2 - 1, gun2);
@@ -35,8 +35,8 @@ export const addUser = (values) => {
           });
         case "Year descending":
           return data.sort((a, b) => {
-            let [ay1, gun1, yil1] = a.split("/");
-            let [ay2, gun2, yil2] = b.split("/");
+            let [ay1, gun1, yil1] = a.date.split("/");
+            let [ay2, gun2, yil2] = b.date.split("/");
     
             let date1 = new Date(yil1, ay1 - 1, gun1);
             let date2 = new Date(yil2, ay2 - 1, gun2);
@@ -89,7 +89,7 @@ export const addUser = (values) => {
         }
         if (order !== undefined) {
           result = result.filter((user) =>
-            isTargetContains(search, user.NameSurname)
+            isTargetContains(search, user.nameSurname)
           );
           orderBy(result, order);
         }
