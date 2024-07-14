@@ -18,12 +18,14 @@ const Add = () => {
       company: "",
       city: "",
       email: "",
+      website:"",
       date: new Date().getFullYear().toString(),
     },
 
     validationSchema,
     onSubmit: (values, { resetForm }) => {
       try {
+        window.alert("Başarı ile eklendi.");
         toast("Added Succesfull", {
           position: "bottom-right",
           autoClose: 5000,
