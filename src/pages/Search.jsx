@@ -16,7 +16,7 @@ const Search = () => {
   const [maxPageLimit, setMaxPageLimit] = useState(6);
   const [newWord, setnewWord] = useState(searchInput || "");
   const [isOpen, setisOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("orderBy");
+  const [selectedOption, setSelectedOption] = useState("Order By");
   
   const handleSelect = (option) => {
     setSelectedOption(option);
