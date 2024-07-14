@@ -1,34 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./pagination.module.scss";
-import { getPageNumbers } from "../../database/dbFunctions";
 const Pagination = (props) => {
-  const { currentPage, totalPages, filteredRecords, onCurrentPageChange } =
-    props;
 
-  const pageNumbers = getPageNumbers(currentPage, totalPages);
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      onCurrentPageChange(page);
-    }
-    if (page !== currentPage) {
-      setIsClicked(true);
-    }
-  };
-
-  useEffect(() => {
-    setIsClicked(false);
-  }, [currentPage, filteredRecords]);
-
-  useEffect(() => {
-    onCurrentPageChange(1);
-  }, [filteredRecords]);
+  const { currentPage, maxPageLimit, minPageLimit, totalPages,getUsers,setShowData,selectedOption,searchInput } = props;
 
   const pages = [];
 
   for (let i = 1; i <= totalPages; i++) {
     pages.push(i);
+  }
+
+  const handlePrevClick = () => {
+    props.onPrevClick();
+
+  };
+
+  const handleNextClick = () => {
+    props.onNextClick();
+  };
+
+  const handlePageClick = (e) => {
+    props.onPageChange(Number(e.target.id));
+    const res = getUsers({ search: searchInput, limit: 7, page: Number(e.target.id),order:selectedOption }); 
+    setShowData(res);
+  };
+
+  const pageNumbers = pages.map((page) => {
+    if (page <= maxPageLimit && page > minPageLimit) {
+      return (
+        <li
+          key={page}
+          id={page}
+          onClick={handlePageClick}
+          className={currentPage === page ? styles.active : styles.notactive}
+        >
+          {page}
+        </li>
+      );
+    } else {
+      return null;
+    }
+  });
+
+  let pageIncrementEllipses = null;
+  if (pages.length > maxPageLimit) {
+    pageIncrementEllipses = (
+      <li onClick={handleNextClick}>
+        <p className={styles.dots}>...</p>
+      </li>
+    );
+  }
+  let pageDecremenEllipses = null;
+  if (minPageLimit >= 1) {
+    pageDecremenEllipses = (
+      <li onClick={handlePrevClick}>
+        {" "}
+        <p className={styles.dots}>...</p>
+      </li>
+    );
   }
 
   return (
@@ -37,36 +66,20 @@ const Pagination = (props) => {
         <li>
           <button
             className={styles.button}
+            onClick={handlePrevClick}
             disabled={currentPage === pages[0]}
-            onClick={() => handlePageChange(currentPage - 1)}
           >
             Previous
           </button>
         </li>
-
-        {pageNumbers.map((page, index) => (
-          <li
-            key={index}
-            className={
-              currentPage === page
-                ? styles.active
-                : page !== "number"
-                ? styles.threeDot
-                : styles.notactive
-            }
-            onClick={(e) => {
-              handlePageChange(page, e.target);
-            }}
-          >
-            {page}
-          </li>
-        ))}
-
+        {pageDecremenEllipses}
+        {pageNumbers}
+        {pageIncrementEllipses}
         <li>
           <button
             className={styles.button}
+            onClick={handleNextClick}
             disabled={currentPage === pages[pages.length - 1]}
-            onClick={() => handlePageChange(currentPage + 1)}
           >
             Next
           </button>
