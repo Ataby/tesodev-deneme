@@ -25,7 +25,7 @@ const Add = () => {
     validationSchema,
     onSubmit: (values, { resetForm }) => {
       try {
-        window.alert("Başarı ile eklendi.");
+        window.alert("Added successfully");
         toast("Added Succesfull", {
           position: "bottom-right",
           autoClose: 5000,
