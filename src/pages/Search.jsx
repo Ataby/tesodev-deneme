@@ -1,55 +1,67 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { getUsers, orderBy } from "../database/dbFunctions";
 import { useLocation } from "react-router-dom";
 import ResultCard from "../components/ResultCard/ResultCard";
 import Pagination from "../components/Pagination/pagination";
 import Header from "../components/SearchPage/Header";
 import Sorting from "../components/SearchPage/Sorting";
-
 const Search = () => {
-  const { searchInput } = useLocation().state;
+
+  const { searchResults, searchInput } =useLocation().state;
   const isFirstRender = useRef(true);
 
   const [showData, setShowData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [minPageLimit, setMinPageLimit] = useState(0);
+  const [maxPageLimit, setMaxPageLimit] = useState(6);
   const [newWord, setnewWord] = useState(searchInput || "");
-
   const [isOpen, setisOpen] = useState(false);
-
   const [selectedOption, setSelectedOption] = useState("orderBy");
-
+  
   const handleSelect = (option) => {
     setSelectedOption(option);
     setisOpen(false);
-    const res = getUsers({
-      search: searchInput,
-      limit: 7,
-      page: 1,
-      order: option,
-    });
-    setShowData(res);
+    
+    const res = getUsers({ search: searchInput, limit: 7, page: currentPage,order:option }); 
+    setShowData(res); 
+    console.log(showData.data,"showw",option,"option");
   };
 
-  const getDataWithPage = (page, order) => {
-    const res = getUsers({
-      search: searchInput,
-      limit: 7,
-      page: page,
-      order: order,
-    });
+  const getDataWithPage = (page,order) => {
+    const res = getUsers({ search: searchInput, limit: 7, page: page,order:order });
+    console.log(newWord, "newWord");
     setShowData(res);
+    //return res.data;
+    //console.log("showdata", res);
   };
-
   const onPageChange = (pageNumber) => {
-    getDataWithPage(pageNumber);
+    const res = getUsers({ search: searchInput, limit: 7, page: pageNumber}); 
+    setShowData(res);
     setCurrentPage(pageNumber);
+  };
+  const onPrevClick = () => {
+    if ((currentPage - 1) % 3 === 0) {
+      setMaxPageLimit(maxPageLimit - 3);
+      setMinPageLimit(minPageLimit - 3);
+    }
+    setCurrentPage((prev) => prev - 1);
+    const res = getUsers({ search: searchInput, limit: 7, page: currentPage-1,order:selectedOption }); 
+    setShowData(res);
+  };
+  const onNextClick = () => {
+    if (currentPage + 1 > maxPageLimit) {
+      setMaxPageLimit(maxPageLimit + 3);
+      setMinPageLimit(minPageLimit + 3);
+    }
+    setCurrentPage((prev) => prev + 1);
+    const res = getUsers({ search: searchInput, limit: 7, page: currentPage+1,order:selectedOption }); 
+    setShowData(res);
   };
 
   useEffect(() => {
     if (isFirstRender.current) {
       getDataWithPage(1);
-      isFirstRender.current = false;
+      isFirstRender.current=(false);
     }
   }, []);
 
@@ -61,6 +73,7 @@ const Search = () => {
           newWord={newWord}
           setnewWord={setnewWord}
           searchInput={searchInput}
+          
         />
         <main className="mainContainer">
           <div className="d-flex w-full  flex-col justify-center items-center">
@@ -94,10 +107,15 @@ const Search = () => {
               <Pagination
                 onPageChange={onPageChange}
                 currentPage={currentPage}
+                minPageLimit={minPageLimit}
+                onPrevClick={onPrevClick}
+                onNextClick={onNextClick}
                 totalPages={showData?.pages}
-                getDataWithPage={getDataWithPage}
-                onCurrentPageChange={(value) => setCurrentPage(value)}
-                filteredRecords={showData.data}
+                maxPageLimit={maxPageLimit}
+                getUsers={getUsers}
+                setShowData={setShowData}
+                selectedOption={selectedOption}
+                searchInput={searchInput}
               />
             )}
           </div>
@@ -106,5 +124,4 @@ const Search = () => {
     </>
   );
 };
-
 export default Search;
