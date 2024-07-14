@@ -112,7 +112,7 @@ body {
 .mainContainer {
   padding-top: 10px;
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   padding: 0;
   margin: 0;
   display: flex;
@@ -123,6 +123,9 @@ body {
 
   @media screen and (min-height: 700px) {
     gap: 1.25rem;
+  }
+  & ul::-webkit-scrollbar {
+    display: none;
   }
 }
 
