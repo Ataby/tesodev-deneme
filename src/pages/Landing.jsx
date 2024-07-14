@@ -51,20 +51,20 @@ const Landing = () => {
       <div className="container">
         <main className="mainContainer ">
           <div className="landingHeaderContainer ">
-            <div className="headerButtonContainer  ">
+            <div className="headerButtonContainer">
               <Button
                 onClick={() => navigate("/add")}
                 text={"Add new record"}
               />
             </div>
           </div>
-          <div className="findInContainer  ">
+          <div className="findInContainer">
             <div>
               <img src={Logo} alt="main-logo" />
               <div className=" logoDescription">Search App</div>
             </div>
 
-            <div className="w-full mt-5 justify-center items-center d-flex flex-col">
+            <div className="w-full mt-5 justify-center items-center d-flex flex-col ">
               <div className="searchContainer  ">
                 <p className="heading">Find in records</p>
 
@@ -88,13 +88,13 @@ const Landing = () => {
             </div>
           </div>
 
-          <div className="carouselSection  ">
-            <div className="d-flex  justify-center items-center flex-col   ">
-              <div className="text-start  w-full ">
+          <div className="carouselSection">
+            <div className="d-flex justify-center items-center flex-col">
+              <div className="text-start w-full">
                 <p className="heading">Top News</p>
               </div>
 
-              <div className="d-flex flex-col padding  ">
+              <div className="d-flex flex-col">
                 <Carousel />
               </div>
             </div>
